@@ -19,6 +19,8 @@ namespace BorrowingBooks.Controllers
 
             return View(emprestimos);
         }
+<<<<<<<<< Temporary merge branch 1
+=========
 
         [HttpGet]
         public IActionResult Cadastrar()
@@ -106,5 +108,6 @@ namespace BorrowingBooks.Controllers
             return RedirectToAction("Index");
 
         }
+>>>>>>>>> Temporary merge branch 2
     }
 }
