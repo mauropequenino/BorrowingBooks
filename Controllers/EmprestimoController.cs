@@ -72,8 +72,12 @@ namespace BorrowingBooks.Controllers
                 _db.Emprestimos.Add(emprestimos);
                 _db.SaveChanges();
 
+                TempData["MensagemSucesso"] = "Registo adicionado com sucesso!";
+
                 return RedirectToAction("Index");
             }
+
+            TempData["MensagemErro"] = "Ocorreu algum erro ao efectuar o registo!";
 
             return View();
         }
@@ -86,8 +90,12 @@ namespace BorrowingBooks.Controllers
                 _db.Emprestimos.Update(emprestimos);
                 _db.SaveChanges();
 
+                TempData["MensagemSucesso"] = "Registo actuliazdo com sucesso!";
+
                 return RedirectToAction("Index");
             }
+
+            TempData["MensagemErro"] = "Ocorreu algum erro ao actualziar o registo!";
 
             return View();
         }
@@ -95,16 +103,21 @@ namespace BorrowingBooks.Controllers
         [HttpPost]
         public IActionResult Excluir(EmprestimosModel emprestimos)
         {
-            if (ModelState.IsValid == null)
+            if (ModelState.IsValid)
             {
-                return NotFound();
+                _db.Emprestimos.Remove(emprestimos);
+                _db.SaveChanges();
+
+                TempData["MensagemSucesso"] = "Registo removido om sucesso!";
+
+                return RedirectToAction("Index");
+
             }
 
-            _db.Emprestimos.Remove(emprestimos);
-            _db.SaveChanges();
+            TempData["MensagemErro"] = "Ocorreu algum erro ao remover o registo!";
 
-            return RedirectToAction("Index");
-
+            return NotFound();
         }
+
     }
 }
